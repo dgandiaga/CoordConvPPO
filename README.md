@@ -31,12 +31,12 @@ pip3 install -r requirements.txt
 
 Then you can run the training script. It accpets also the --render argument if you whant to check the live performance:
 
-´´´
+```
 python3 src/train.py --tag coordconv --img-size 48
-´´´
+```
 
 Once the training is done you can execute the test script. Make sure that you use the correct model name, models are generated and stored in the **models** folder. You don't need to add the extension, only the name of the file. I provide some models in case you don't want to train your own, since it may be time consumpting:
 
-´´´
+```
 python3 src/test.py --model coordconv_2021-12-13_11:47:37 --render
-´´´
+```
