@@ -21,7 +21,7 @@ The results shown an improvement on both time and performance. Here you can see 
 
 ## Usage
 
-The repository is not dockerized since I experienced many issues while executing OpenAI render functions in a container, as detailed here: https://stackoverflow.com/questions/40195740/how-to-run-openai-gym-render-over-a-server
+The repository is not dockerized since I experienced many issues while executing OpenAI render functions in a container due to its lack of display, as detailed here: https://stackoverflow.com/questions/40195740/how-to-run-openai-gym-render-over-a-server. The thing is that CarRacing environment calls the render function inside its step function since the state is the image and it has to build it, so this call is not avoidable. I've tryed many proposed solutions like redirecting the display, using a wrapper or modifying the original OpenAI environment but none of them worked.
 
 In the source folder of the project you'll find the requirements:
 
