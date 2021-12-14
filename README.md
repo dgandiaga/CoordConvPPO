@@ -1,5 +1,5 @@
 # Summary
-This repository implements [Proximal Policy Optimization](https://medium.com/intro-to-artificial-intelligence/proximal-policy-optimization-ppo-a-policy-based-reinforcement-learning-algorithm-3cf126a7562d) for the **OpenAI CarRacing-v0** environment using an architecture based on [CoordConv layers](https://arxiv.org/abs/1807.03247).
+This repository implements [Proximal Policy Optimization](https://medium.com/intro-to-artificial-intelligence/proximal-policy-optimization-ppo-a-policy-based-reinforcement-learning-algorithm-3cf126a7562d) for the **OpenAI CarRacing-v0** environment using an architecture based on [CoordConv layers](https://arxiv.org/abs/1807.03247), since in the original paper they applied it to several Reinforcement Learning Atari environments with some success.
 
 * The **PPO** algorithm is a revision from what was shown in https://github.com/xtma/pytorch_car_caring. I use a simmilar **two-headed structure** for the output of the network that returns:
     * The **(alpha beta)** parameters for generating a **beta distribution** for sampling the value for each of the three actions (turn, speed, brake).
