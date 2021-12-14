@@ -30,12 +30,6 @@ class Env:
         total_reward = 0
         for i in range(self.action_repeat):
             img_rgb, reward, die, _ = self.env.step(action)
-            # don't penalize "die state"
-            if die:
-                reward += 100
-            # green penalty
-            if np.mean(img_rgb[:, :, 1]) > 185.0:
-                reward -= 0.05
             total_reward += reward
             # if no reward recently, end the episode
             done = True if self.av_r(reward) <= -0.1 else False
