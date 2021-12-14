@@ -54,10 +54,10 @@ python3 src/visualize.py --model-name convnet_2021-12-13--21:50:29
 
 This visualizations are saved in **results/comparison** folder. You don't need to pass the **--model-name** argument, but if you do it will also use that model for some test runs, saving them as gifs with also some examples of the beta functions that chose the actions in every step, saving them in **results/samples**.
 
-There's also a quick test you can run if you decide to make changes in the architectures. It basically checks that the state returned by the environment fits properly in the architecture of the agent's policy network for every model inplemented:
+There's also a quick test you can run if you decide to make changes in the architectures. It basically checks that the state returned by the environment fits properly in the architecture of the agent's policy network defined for every model inplemented:
 
 ```
-python src/network_architecture_testing.py 
+python3 src/network_architecture_testing.py 
 ```
 
 # Results
