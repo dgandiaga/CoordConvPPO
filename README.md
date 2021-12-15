@@ -69,7 +69,7 @@ This the comparison between models I was talking above:
 
 These are averaged over 5 runs for each type of model. We can see that the performance by episode is a bit lower in the **CoordConvolutional model** at the beginning but after that it experiences a less erratic behavior than the baseline model. This last one is quite unpredictable, in 2 of the 5 runs it started loosing performance until it almost reached an averaged reward over the last 100 episodes of zero by the end of the 2000 episodes. This volatile behavior appears also in the **CoordConvolutional** model but with a smaller impact, I think this is because being a smaller model makes it less prone to overfitting. Some other implementations (including the one I took as baseline) prevent this effect and make the training more robust by modifying the rewards returned by the environment, for example including a penalty if the car is in the grass, removing the dying penalty or adding a bonus if it's going at maximum speed. I rejected this approach because I wanted to establish a comparison between models as independent of the environment as possible so the conclusions can be applied to different problems.
 
-If we check the averaged reward **by time** instead of by episode the **CoordConvolutional** model outperforms clearly the baseline, since it takes the half the time than the baseline for each episode.
+If we check the averaged reward **by time** instead of by episode the **CoordConvolutional** model outperforms clearly the baseline, since it takes half the time than the baseline for each episode.
 
 ![compared_models_time](https://user-images.githubusercontent.com/26325749/146083149-9f6a15a0-8baa-4493-bfd5-428c05de8b80.png)
 
