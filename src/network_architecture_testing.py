@@ -34,6 +34,14 @@ class TestDatasets(unittest.TestCase):
 
         (alpha, beta), v = agent.net(state)
 
+        self.assertEqual(alpha.shape[0], 1)
+        self.assertEqual(alpha.shape[1], 3)
+        self.assertEqual(beta.shape[0], 1)
+        self.assertEqual(beta.shape[1], 3)
+        self.assertEqual(v.shape[0], 1)
+        self.assertEqual(v.shape[1], 1)
+
+
         print(f'Agent-Environment network compatibility checked for model coordconvnet')
 
 
