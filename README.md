@@ -3,7 +3,7 @@ This repository implements [Proximal Policy Optimization](https://medium.com/int
 
 * The **PPO** algorithm is a revision from what was shown in https://github.com/xtma/pytorch_car_caring. I use a simmilar **two-headed structure** for the output of the network that returns:
     * The **(alpha beta)** parameters for generating a **beta distribution** for sampling the value for each of the three actions (turn, speed, brake).
-    * The value for the update while training the model.
+    * The state value for the update while training the model.
 * For the architecture of the net I reduced the input image size from 96x96 to 48x48 and the number of convolutional layers from 6 to 4. In order to regain the accuracy lost by simplifying the model and the input size I've modified the architecture for using **CoordConv** layers instead of regular convolutional layers. My main reference was this implementation: https://github.com/walsvid/CoordConv
 
 The final architecture looks like this:
