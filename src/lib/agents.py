@@ -87,21 +87,33 @@ class Agent:
         old_a_logp = torch.tensor(self.buffer['a_logp'], dtype=torch.double).to(self.device).view(-1, 1)
 
         with torch.no_grad():
-            # Use the v returned by the second head of the net for calculating the advantage
+            # We calculate the target state values prior to the training loop, and use their differences with the state
+            # values of the original state as advantages
             target_v = r + self.gamma * self.net(s_)[1]
             adv = target_v - self.net(s)[1]
 
         for _ in tqdm.tqdm(range(self.ppo_epoch), total=self.ppo_epoch):
             for index in BatchSampler(SubsetRandomSampler(range(self.buffer_capacity)), self.batch_size, False):
+                # In every batch we get the beta distribution with the current network, and calculate the exponential
+                # ratio between the action log probability of the action chosen back then and now
                 alpha, beta = self.net(s[index])[0]
                 dist = Beta(alpha, beta)
                 a_logp = dist.log_prob(a[index]).sum(dim=1, keepdim=True)
                 ratio = torch.exp(a_logp - old_a_logp[index])
 
+                # The action loss is the negative mean of the product between ratio and advantage. We use two different
+                # versions, of the potential update, one with the ratio as it was calculated and the second one with it
+                # restricted to [0.9, 1.1] and we take the lowest option for each action, so we make sure that ratios
+                # don't go too high making the training unstable
                 surr1 = ratio * adv[index]
                 surr2 = torch.clamp(ratio, 1.0 - self.clip_param, 1.0 + self.clip_param) * adv[index]
                 action_loss = -torch.min(surr1, surr2).mean()
+
+                # The value loss is just the smooth L1 loss between the current state values returned by the net and
+                # the target state values we calculated before
                 value_loss = F.smooth_l1_loss(self.net(s[index])[1], target_v[index])
+
+                # And the final loss is the sum of both of them, giving double weight to the state loss
                 loss = action_loss + 2. * value_loss
 
                 self.optimizer.zero_grad()
